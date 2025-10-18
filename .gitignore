@@ -1,4 +1,5 @@
 HELP.md
+README_with_GraphiQL.md
 .gradle
 build/
 !gradle/wrapper/gradle-wrapper.jar
