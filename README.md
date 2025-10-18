@@ -117,16 +117,14 @@ query {
 
 Spring Boot GraphQL Starter tích hợp sẵn **GraphiQL UI**, một giao diện web trực quan để test các truy vấn GraphQL.
 
-### 🔹 Bật GraphiQL trong `application.yml`
-```yaml
-spring:
-  graphql:
-    graphiql:
-      enabled: true
+### 🔹 Bật GraphiQL trong `application.properties`
+```properties
+# GraphQL
+spring.graphql.graphiql.enabled=true
 ```
 
 ### 🔹 Mở trình duyệt tại
-[http://localhost:8080/graphiql](http://localhost:8080/graphiql)
+[http://localhost:8081/graphiql](http://localhost:8081/graphiql)
 
 ## 🏗️ Build and Run
 
