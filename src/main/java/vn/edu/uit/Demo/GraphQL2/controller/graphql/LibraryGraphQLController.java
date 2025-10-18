@@ -1,4 +1,4 @@
-package vn.edu.uit.Demo.GraphQL2.graphql;
+package vn.edu.uit.Demo.GraphQL2.controller.graphql;
 
 import java.util.List;
 
