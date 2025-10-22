@@ -1,6 +1,7 @@
 package vn.edu.uit.Demo.GraphQL2.service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.stereotype.Service;
 
@@ -8,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import vn.edu.uit.Demo.GraphQL2.model.Author;
 import vn.edu.uit.Demo.GraphQL2.model.Book;
+import vn.edu.uit.Demo.GraphQL2.model.dto.book_dto.dtoReqBook;
 import vn.edu.uit.Demo.GraphQL2.repository.AuthorRepository;
 import vn.edu.uit.Demo.GraphQL2.repository.BookRepository;
 
@@ -26,10 +28,34 @@ public class LibraryService {
     }
 
     public Book addBook(String title, Long authorId) {
-        Author author = authorRepository.findById(authorId).orElseThrow();
         Book book = new Book();
-        book.setTitle(title);
-        book.setAuthor(author);
+        try {
+            Author author = authorRepository.findById(authorId).get();
+            if (author == null) {
+                throw new NoSuchElementException("Author with ID " + authorId + " not found.");
+            }
+            book.setTitle(title);
+            book.setAuthor(author);
+        } catch (NoSuchElementException e) {
+            throw new IllegalArgumentException("Author with ID " + authorId + " not found.");
+        }
+        return bookRepository.save(book);
+    }
+
+    public Book getBookById(Long bookId) {
+        return bookRepository.findById(bookId).orElseThrow();
+    }
+
+    public Book addBook(dtoReqBook dto) {
+        Book book = new Book();
+        try {
+            Author author = authorRepository.findById(dto.getAuthorId()).orElseThrow();
+
+            book.setTitle(dto.getTitle());
+            book.setAuthor(author);
+        } catch (NoSuchElementException e) {
+            throw new IllegalArgumentException("Author with ID " + dto.getAuthorId() + " not found.");
+        }
         return bookRepository.save(book);
     }
 

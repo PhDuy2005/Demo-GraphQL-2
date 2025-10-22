@@ -24,6 +24,11 @@ public class LibraryGraphQLController {
     }
 
     @QueryMapping
+    public Book bookById(@Argument("bookId") Long bookId) {
+        return libraryService.getBookById(bookId);
+    }
+
+    @QueryMapping
     public List<Author> authors() {
         return libraryService.getAllAuthors();
     }
